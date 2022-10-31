@@ -31,7 +31,7 @@
     (if-let [^js page-component (page-fn name)]
       (do
         (when layout-component
-          (set-layout! page-component layout-component #c layout-props))
+          (set-layout! page-component layout-component layout-props))
         page-component)
       (js/console.error (str "No page called " name " exists")))))
 
