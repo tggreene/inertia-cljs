@@ -24,7 +24,7 @@
 
 (defn simple-resolve-fn
   "Simple resolve implementation that takes a page-fn and returns a resolve-fn
-   optionally takes a "
+  for inertia"
   [{:keys [page-fn layout-component layout-props]}]
   (fn resolve-fn
     [name]
