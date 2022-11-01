@@ -2,7 +2,8 @@
   (:require
    ["@inertiajs/inertia-react" :refer [createInertiaApp useForm usePage]]
    ["react" :as react]
-   [applied-science.js-interop :as j]))
+   [applied-science.js-interop :as j]
+   [cljs-bean.core :refer [->clj]]))
 
 (defn ->js-shallow
   [x]
@@ -78,13 +79,13 @@
   [initialData]
   (let [{:keys [data setData post processing errors]}
         (j/lookup (useForm (clj->js initialData)))]
-    {:data (js->clj data :keywordize-keys true)
+    {:data (->clj data)
      :setData #(setData (name %1) %2)
      :post post
      :processing processing
-     :errors (js->clj errors :keywordize-keys true)}))
+     :errors (->clj errors)}))
 
 (defn use-page
   []
-  (let [page (usePage)]
-    (js->clj page :keywordize-keys true)))
+  (let [^js page (usePage)]
+    (->clj page)))
