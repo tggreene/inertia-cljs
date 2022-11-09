@@ -8,8 +8,9 @@
 (defn renderer
   [{:keys [root-component root-props]
     {:keys [App el props]} :inertia-props}]
-  (when-not root
-    (set! root (react-dom/createRoot el)))
+  (when root
+    (.unmount root))
+  (set! root (react-dom/createRoot el))
   (let [component
         (cond->> (react/createElement
                   App
